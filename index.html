@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elective Recommendation System - MPSTM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">MPSTM Elective Guide</div>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" onclick="showSection('login')">Login</a></li>
+                <li><a href="#" onclick="showSection('explore')">Explore Electives</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Mukesh Patel School Of Technology and Management</h1>
+                <h2>Smart Elective Selection System</h2>
+                <p>Choose your path wisely. Find electives that match YOUR goals, skills, and schedule.</p>
+                <button class="btn btn-primary" onclick="showSection('login')">Get Started</button>
+            </div>
+            <div class="hero-features">
+                <div class="feature-card">
+                    <h3>📋 Smart Quiz</h3>
+                    <p>Thorough assessment of your goals and aptitudes</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⭐ Recommendations</h3>
+                    <p>Personalized elective suggestions with reasoning</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📚 Explore Courses</h3>
+                    <p>Browse faculty info and student reviews</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login/Registration Section -->
+    <section id="login" class="section">
+        <div class="container">
+            <h2>Student Login</h2>
+            <form class="form-container" id="loginForm">
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="rollNumber">Roll Number:</label>
+                    <input type="text" id="rollNumber" placeholder="e.g., 2024001" required>
+                </div>
+                <div class="form-group">
+                    <label for="branch">Branch:</label>
+                    <select id="branch" required>
+                        <option value="">Select Branch</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Mechanical">Mechanical</option>
+                        <option value="Civil">Civil</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="year">Year:</label>
+                    <select id="year" required>
+                        <option value="">Select Year</option>
+                        <option value="1">First Year</option>
+                        <option value="2">Second Year</option>
+                        <option value="3">Third Year</option>
+                        <option value="4">Fourth Year</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="loginStudent()">Login & Take Quiz</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="section">
+        <div class="container">
+            <h2>Elective Selection Quiz</h2>
+            <p class="quiz-info">Answer these questions to get personalized elective recommendations</p>
+            
+            <form id="quizForm" class="quiz-container">
+                <!-- Question 1: Career Ambitions -->
+                <div class="quiz-question">
+                    <h3>1. What are your primary career ambitions?</h3>
+                    <label><input type="radio" name="careerAmbition" value="Software Development"> Software Development / Web Development</label>
+                    <label><input type="radio" name="careerAmbition" value="Data Science"> Data Science / AI & Machine Learning</label>
+                    <label><input type="radio" name="careerAmbition" value="System Design"> System Design / Infrastructure</label>
+                    <label><input type="radio" name="careerAmbition" value="Cybersecurity"> Cybersecurity / Network Administration</label>
+                    <label><input type="radio" name="careerAmbition" value="Hardware"> Hardware / Embedded Systems</label>
+                    <label><input type="radio" name="careerAmbition" value="Not Sure"> I'm Still Exploring</label>
+                </div>
+
+                <!-- Question 2: Technical Interests -->
+                <div class="quiz-question">
+                    <h3>2. Which technical area interests you most?</h3>
+                    <label><input type="radio" name="techInterest" value="Frontend"> Frontend / UI/UX Design</label>
+                    <label><input type="radio" name="techInterest" value="Backend"> Backend / Databases</label>
+                    <label><input type="radio" name="techInterest" value="Mathematical"> Mathematical / Algorithmic Thinking</label>
+                    <label><input type="radio" name="techInterest" value="Systems"> Systems / Low-level Programming</label>
+                    <label><input type="radio" name="techInterest" value="IoT"> IoT / Embedded Systems</label>
+                    <label><input type="radio" name="techInterest" value="Undecided"> Not Sure Yet</label>
+                </div>
+
+                <!-- Question 3: Coding Experience -->
+                <div class="quiz-question">
+                    <h3>3. What is your current coding experience level?</h3>
+                    <label><input type="radio" name="codingExperience" value="Beginner"> Beginner - Learning Basics</label>
+                    <label><input type="radio" name="codingExperience" value="Intermediate"> Intermediate - Comfortable with Core Concepts</label>
+                    <label><input type="radio" name="codingExperience" value="Advanced"> Advanced - Built Projects Before</label>
+                </div>
+
+                <!-- Question 4: Available Time -->
+                <div class="quiz-question">
+                    <h3>4. How much time can you dedicate weekly?</h3>
+                    <label><input type="radio" name="availableTime" value="Limited"> Limited (5-8 hours/week) - Need flexible electives</label>
+                    <label><input type="radio" name="availableTime" value="Moderate"> Moderate (8-12 hours/week) - Balanced schedule</label>
+                    <label><input type="radio" name="availableTime" value="Extensive"> Extensive (12+ hours/week) - Can handle demanding electives</label>
+                </div>
+
+                <!-- Question 5: Learning Style -->
+                <div class="quiz-question">
+                    <h3>5. What's your preferred learning style?</h3>
+                    <label><input type="radio" name="learningStyle" value="Hands-on"> Hands-on / Project-based</label>
+                    <label><input type="radio" name="learningStyle" value="Theoretical"> Theoretical / Conceptual</label>
+                    <label><input type="radio" name="learningStyle" value="Balanced"> Balanced Mix</label>
+                </div>
+
+                <!-- Question 6: Practical Applications -->
+                <div class="quiz-question">
+                    <h3>6. Do you prefer practical or research-oriented courses?</h3>
+                    <label><input type="radio" name="orientation" value="Practical"> Practical - Real-world applications</label>
+                    <label><input type="radio" name="orientation" value="Research"> Research - Theoretical depth</label>
+                    <label><input type="radio" name="orientation" value="Both"> Both equally</label>
+                </div>
+
+                <!-- Question 7: Class Schedule Preference -->
+                <div class="quiz-question">
+                    <h3>7. Preferred class timings?</h3>
+                    <label><input type="radio" name="classTime" value="Morning"> Morning (8-11 AM)</label>
+                    <label><input type="radio" name="classTime" value="Afternoon"> Afternoon (12-4 PM)</label>
+                    <label><input type="radio" name="classTime" value="Evening"> Evening (4-7 PM)</label>
+                    <label><input type="radio" name="classTime" value="Flexible"> Flexible / Online</label>
+                </div>
+
+                <!-- Question 8: Team Projects -->
+                <div class="quiz-question">
+                    <h3>8. Do you prefer team projects or individual work?</h3>
+                    <label><input type="radio" name="teamPreference" value="Team"> Team Projects</label>
+                    <label><input type="radio" name="teamPreference" value="Individual"> Individual Work</label>
+                    <label><input type="radio" name="teamPreference" value="Either"> Either is Fine</label>
+                </div>
+
+                <button type="button" class="btn btn-primary" onclick="submitQuiz()">Get My Recommendations</button>
+                <button type="button" class="btn btn-secondary" onclick="showSection('login')">Go Back</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="section">
+        <div class="container">
+            <h2>Your Personalized Recommendations</h2>
+            <div class="student-info" id="studentInfo"></div>
+            
+            <div id="recommendedElectives" class="recommendations-container">
+                <!-- Recommendations will be populated by JavaScript -->
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="showSection('explore')">Explore All Electives</button>
+                <button class="btn btn-secondary" onclick="showSection('home')">Go to Home</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Electives Section -->
+    <section id="explore" class="section">
+        <div class="container">
+            <h2>All Available Electives</h2>
+            
+            <div class="filters">
+                <input type="text" id="searchElective" placeholder="Search electives..." onkeyup="filterElectives()">
+                <select id="filterBranch" onchange="filterElectives()">
+                    <option value="">All Branches</option>
+                    <option value="CS">Computer Science</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="EC">Electronics</option>
+                </select>
+            </div>
+
+            <div id="electivesContainer" class="electives-grid">
+                <!-- Electives will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Elective Details Section -->
+    <section id="electiveDetail" class="section">
+        <div class="container">
+            <button class="btn btn-secondary" onclick="showSection('explore')">← Back to Electives</button>
+            <div id="electiveDetailContent" class="elective-detail">
+                <!-- Details will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Mukesh Patel School Of Technology and Management. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
